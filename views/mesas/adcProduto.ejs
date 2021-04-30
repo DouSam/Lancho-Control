@@ -1,0 +1,39 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <form action="/mesas/<%= mesa %>?_method=PUT" method="post">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Adicionar produto na comanda</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="produto">Produto</label>
+                <select name="produto" id="produto" class="form-control">
+                    <option value="">Selecione o produto</option>
+                    <% produtos.forEach(function(produto){ %>
+                        <option value="<%= produto._id %>"><%= produto.nome %></option>
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="qtd">Quantidade</label>
+                <input type="number" name="qtd" id="qtd" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="adc">Valor adicional?</label>
+                <input type="number" name="adc" id="adc" class="form-control" step="0.1">
+            </div>
+        </div>
+        <input type="text" name="op" id="op" value="adcP" hidden>
+        <input type="text" name="comanda" id="comanda" value="<%= comanda %>" hidden>
+        <button type="submit" class="btn btn-primary btn-block mb-1">Adicionar produto</button>
+    </form>
+</div>
+
+<%- include("../partials/footer") -%>

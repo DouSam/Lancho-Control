@@ -1,0 +1,161 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <form action="/produtos/<%= produto._id %>?_method=PUT" method="post">
+        <div class="row">
+            <div class="col form-group">
+                <h1 class="text-center">Edição de produto</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" class="form-control" value="<%= produto.nome %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 form-group">
+                <label for="val">Valor:</label>
+                <input type="number" step="0.1" name="val" id="val" class="form-control" value="<%= produto.val %>">
+            </div>
+            <div class="col-3">
+                <label for="qtdEst">Quantidade em Estoque:</label>
+                <input type="number" name="qtdEst" id="qtdEst" class="form-control" value="<%= produto.qtdEst %>">
+            </div>
+            <div class="col-3">
+                <label for="altEst">Quantidade Mínima:</label>
+                <input type="number" name="altEst" id="altEst" class="form-control" value="<%= produto.altEst %>">
+            </div>
+            <div class="col-3">
+                <label for="unidadeComercial">Unidade Comercial</label>
+                <select name="unidadeComercial" id="unidadeComercial" class="form-control" required>
+                    <option value="<%= produto.unidadeComercial %>"><%= produto.unidadeComercial %></option>
+                    <option value="AMPOLA">AMPOLA</option>
+                    <option value="BALDE">BALDE</option>
+                    <option value="BANDEJ">BANDEJA</option>
+                    <option value="BARRA">BARRA</option>
+                    <option value="BISNAG">BISNAGA</option>
+                    <option value="BLOCO">BLOCO</option>
+                    <option value="BOBINA">BOBINA</option>
+                    <option value="BOMB">BOMBONA</option>
+                    <option value="CAPS">CAPSULA</option>
+                    <option value="CART">CARTELA</option>
+                    <option value="CENTO">CENTO</option>
+                    <option value="CJ">CONJUNTO</option>
+                    <option value="CM">CENTIMETRO</option>
+                    <option value="CM2">CENTIMETRO QUADRADO</option>
+                    <option value="CX">CAIXA</option>
+                    <option value="CX2">CAIXA COM 2 UNIDADES</option>
+                    <option value="CX3">CAIXA COM 3 UNIDADES</option>
+                    <option value="CX5">CAIXA COM 5 UNIDADES</option>
+                    <option value="CX10">CAIXA COM 10 UNIDADES</option>
+                    <option value="CX15">CAIXA COM 15 UNIDADES</option>
+                    <option value="CX20">CAIXA COM 20 UNIDADES</option>
+                    <option value="CX25">CAIXA COM 25 UNIDADES</option>
+                    <option value="CX50">CAIXA COM 50 UNIDADES</option>
+                    <option value="CX100">CAIXA COM 100 UNIDADES</option>
+                    <option value="DISP">DISPLAY</option>
+                    <option value="DUZIA">DUZIA</option>
+                    <option value="EMBAL">EMBALAGEM</option>
+                    <option value="FARDO">FARDO</option>
+                    <option value="FOLHA">FOLHA</option>
+                    <option value="FRASCO">FRASCO</option>
+                    <option value="GALAO">GALÃO</option>
+                    <option value="GF">GARRAFA</option>
+                    <option value="GRAMAS">GRAMAS</option>
+                    <option value="JOGO">JOGO</option>
+                    <option value="KG">QUILOGRAMA</option>
+                    <option value="KIT">KIT</option>
+                    <option value="LATA">LATA</option>
+                    <option value="LITRO">LITRO</option>
+                    <option value="M">METRO</option>
+                    <option value="M2">METRO QUADRADO</option>
+                    <option value="M3">METRO CÚBICO</option>
+                    <option value="MILHEI">MILHEIRO</option>
+                    <option value="ML">MILILITRO</option>
+                    <option value="MWH">MEGAWATT HORA</option>
+                    <option value="PACOTE">PACOTE</option>
+                    <option value="PALETE">PALETE</option>
+                    <option value="PARES">PARES</option>
+                    <option value="PC">PEÇA</option>
+                    <option value="POTE">POTE</option>
+                    <option value="K">QUILATE</option>
+                    <option value="RESMA">RESMA</option>
+                    <option value="ROLO">ROLO</option>
+                    <option value="SACO">SACO</option>
+                    <option value="SACOLA">SACOLA</option>
+                    <option value="TAMBOR">TAMBOR</option>
+                    <option value="TANQUE">TANQUE</option>
+                    <option value="TON">TONELADA</option>
+                    <option value="TUBO">TUBO</option>
+                    <option value="UNID">UNIDADE</option>
+                    <option value="VASIL">VASILHAME</option>
+                    <option value="VIDRO">VIDRO</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input is-invalid" type="checkbox" value="true" id="ctrEst" name="ctrEst" <%= produto.ctrEst ? 'checked': ''%>>
+                <label class="form-check-label" for="ctrEst">
+                    Controla estoque?
+                </label>
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-3 form-group">
+                <label for="cfop">CFOP:</label>
+                <input type="text" name="cfop" id="cfop" class="form-control" value="<%= produto.cfop %>" required>
+            </div>
+            <div class="col-3">
+                <label for="cean">Codigo de Barras:</label>
+                <input type="text" name="cean" id="cean" class="form-control" value="<%= produto.cean %>">
+            </div>
+            <div class="col-3">
+                <label for="ncm">NCM:</label>
+                <input type="text" name="ncm" id="ncm" class="form-control" value="<%= produto.ncm %>">
+            </div>
+            <div class="col-3">
+                <label for="cest">CEST:</label>
+                <input type="text" name="cest" id="cest" class="form-control" value="<%= produto.cest %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 form-group">
+                <label for="icms">ICMS:</label>
+                <input type="text" name="icms" id="icms" class="form-control" value="<%= produto.icms %>">
+            </div>
+            <div class="col-3 form-group">
+                <label for="issqn">ISSQN:</label>
+                <input type="text" name="issqn" id="issqn" class="form-control" value="<%= produto.issqn %>">
+            </div>
+            <div class="col-3 form-group">
+                <label for="pis">PIS:</label>
+                <input type="text" name="pis" id="pis" class="form-control" value="<%= produto.pis %>">
+            </div>
+            <div class="col-3 form-group">
+                <label for="pisst">PISST:</label>
+                <input type="text" name="pisst" id="pisst" class="form-control" value="<%= produto.pisst %>">
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-3 form-group">
+                <label for="cofins">COFINS:</label>
+                <input type="text" name="cofins" id="cofins" class="form-control" value="<%= produto.cofins %>">
+            </div>
+            <div class="col-3 form-group">
+                <label for="cofinsst">COFINSST:</label>
+                <input type="text" name="cofinsst" id="cofinsst" class="form-control" value="<%= produto.cofinsst %>">
+            </div>
+            <div class="col-3 form-group">
+                <label for="origem">Origem:</label>
+                <input type="text" name="origem" id="origem" class="form-control" value="<%= produto.origem %>">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-1">Finalizar cadastro</button>
+    </form>
+</div>
+
+<script src="/scripts/produto/validator.js"></script>
+
+<%- include("../partials/footer") -%>

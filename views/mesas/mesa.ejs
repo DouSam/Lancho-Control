@@ -1,0 +1,166 @@
+<%- include("../partials/header") -%>
+
+<div class="container mt-1">
+    <% if(error && error.length > 0) { %>
+    <div class="alert alert-danger">
+        <p><%=error %></p>
+    </div>
+    <% } %>
+    <div class="row">
+        <div class="col">
+            <h2>Mesa <%= mesa.numero %></h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>Status: <%= mesa.status %></h4>
+            <button class="btn btn-primary" id="btnLimpar" type="button" <%= (mesa.status == 'suja')?'':'hidden'%> >Limpar</button>
+        </div>
+    </div>
+    <hr>
+    <% if(mesa.status == 'livre' || mesa.status == 'suja'){ %>
+        <div class="row justify-content-between">
+            <div class="col-10">
+                <p>Procure abaixo um cliente para criar uma comanda!</p>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-outline-secondary" type="button" id="btnSemcliente">Sem cliente</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Digite o nome do cliente" aria-label="Digite o nome do cliente"
+                        aria-describedby="button-addon2" id="inputName">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="btnPesquisar">Pesquisar</button>
+                    </div>
+                </div>
+                <div class="form-group" id="divCriar" hidden>
+                    <form action="/mesas/<%= mesa._id %>?_method=PUT" method="POST">
+                        <div class="input-group mb-3">
+                            <select name="id" id="select" class="form-control"></select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" id="btnCriar">Criar comanda</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <form action="/mesas/<%= mesa._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-outline-danger btn-block" type="submit">Deletar mesa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% } else if (mesa.status == 'ocupada'){ %>
+        <div class="comanda">  
+            <div class="row">
+                <span id="numCom" hidden><%= mesa.comanda.num %></span>
+                <div class="col text-center">
+                    <h3>Comanda <%= mesa.comanda.num %></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Cliente: <%= mesa.cliente ? mesa.cliente.nome : '' %></h5>
+                </div>
+                <div class="col">
+                    <h5>Horário Chegada: <%= mesa.comanda.data.toLocaleDateString() %> <%= mesa.comanda.data.toLocaleTimeString() %> </h5>
+                </div>
+            </div>
+            <% if(mesa.cliente){ %>
+                <div class="row">
+                    <div class="col">
+                        <h5>Endereço: <%= mesa.cliente.endereco %>, Nº <%= mesa.cliente.numero %>, Bairro <%= mesa.cliente.bairro %></h5>
+                    </div>
+                </div>
+            <% } %>
+            <div class="row my-2">
+                <div class="col-10 text-center">
+                    <h3>Consumo</h3>
+                </div>
+                <div class="col-2">
+                    <a href="/mesas/<%= mesa._id %>/adicionarProduto" class="btn btn-success">Adicionar Produto</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col-1">#</th>
+                                <th scope="col">Produto</th>
+                                <th scope="col-1">Qtd</th>
+                                <th scope="col-2">Valor Unitário</th>
+                                <th scope="col-2">Valor Total Produto</th>
+                                <th scope="col">Remover</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyProdutos">
+                            <% var qtdPro = 0 %>
+                            <% var valT = 0 %>
+                            <% mesa.comanda.produtos.forEach(function(produtoE){ %>
+                                <% qtdPro = qtdPro + 1 %>
+                                <% if(produtoE.produto == null){ %>
+                                    <tr>
+                                        <td>
+                                            <%= qtdPro %>
+                                        </td>
+                                        <td>
+                                            PRODUTO EXCLUIDO, REMOVA DA COMANDA.
+                                        </td>
+                                        
+                                        <td><img src="/icons/clear-black-48dp.svg" id="<%= produtoE._id %>"></td>
+                                    </tr>
+                                    <% return; %>
+                                <% } %>
+                                <% valT = valT + produtoE.produto.val * produtoE.qtd %>
+                                <tr>
+                                    <td><%= qtdPro %></td>
+                                    <td><%= produtoE.produto.nome %></td>
+                                    <td><%= produtoE.qtd %></td>
+                                    <td>R$<%= produtoE.produto.val.toFixed(2) %></td>
+                                    <td>R$<%= (produtoE.produto.val * produtoE.qtd).toFixed(2) %></td>
+                                    <td><img src="/icons/clear-black-48dp.svg" id="<%= produtoE._id %>"></td>
+                                </tr>
+                                <% if(produtoE.adc != null){ %>
+                                    <% valT = valT + produtoE.adc %>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>R$<%= produtoE.adc.toFixed(2) %></td>
+                                        <td></td>
+                                    </tr>
+                                <% } %>
+                            <% }) %>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total: </td>
+                                <td>R$<%= valT.toFixed(2) %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mb-2">
+                <a href="/mesas/<%= mesa._id %>/fecharComanda" class="btn btn-primary btn-lg btn-block mt-2">Pagamento</a>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<script src="/scripts/socket.io.js"></script>
+<script src="/scripts/mesa/mesa.js"></script>
+
+<%- include("../partials/footer") -%>

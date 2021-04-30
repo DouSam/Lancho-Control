@@ -1,0 +1,26 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <form action="/mesas" method="post">
+        <div class="row">
+            <div class="col form-group">
+                <h1 class="text-center">Criação de nova mesa</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="numero">Numeração:</label>
+                <input type="number" name="numero" id="numero" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="referencia">Referência:</label>
+                <input type="text" name="referencia" id="referencia" class="form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-1">Finalizar cadastro</button>
+    </form>
+</div>
+
+<%- include("../partials/footer") -%>

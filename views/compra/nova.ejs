@@ -1,0 +1,55 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <form action="/compras" method="post" >
+        <div class="row">
+            <div class="col form-group">
+                <h1 class="text-center">Criação de nova compra</h1>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-2">
+                <button type="button" class="btn btn-outline-primary" id="btAdc">Adicionar produto</button>
+            </div>
+        </div>
+        <div id="produtos">
+            <div class="row" id="produto">
+                <div class="col form-group">
+                    <label for="produto">Produto:</label>
+                    <select name="produto" id="produto" class="form-control">
+                        <% produtos.forEach(function(produto){ %>
+                            <option value="<%= produto._id %>"><%= produto.nome %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col-3 form-group">
+                    <label for="qtd">Quantidade:</label>
+                    <input type="number" name="qtd" id="qtd" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="dataC">Data da Compra:</label>
+                <input type="datetime-local" name="dataC" id="dataC" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="valT">Valor da compra:</label>
+                <input type="number" step="0.1" name="valT" id="valT" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="obs">Descrição:</label>
+                <input type="text" name="obs" id="obs" class="form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-1">Finalizar cadastro</button>
+    </form>
+</div>
+
+<script src="/scripts/compras/nova.js"></script>
+
+<%- include("../partials/footer") -%>

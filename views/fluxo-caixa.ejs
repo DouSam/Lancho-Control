@@ -1,0 +1,76 @@
+<%- include("./partials/header") -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Fluxo de Caixa</h1>
+        </div>
+    </div>
+    <form action="" method="get">
+        <div class="row">
+            <div class="col">
+                <label for="dtIni">Data Inicial:</label>
+                <input type="date" class="form-control" aria-describedby="button-addon2" name="dtIni" id="dtIni">
+            </div>
+            <div class="col">
+                <label for="dtIni">Data Fim:</label>
+                <input type="date" class="form-control" aria-describedby="button-addon2" name="dtFim" id="dtFim">
+            </div>
+            <div class='col'>
+                <button class="btn btn-outline-secondary" type="submit" id="btnPesquisar">Pesquisar</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <div class="row" id="tabela">
+        <div class="col-12">
+            <table class="table table-sm table-bordered ">
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Entrada</th>
+                        <th scope="col">Saída</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela">
+                    <% var totalCompra = 0 %>
+                    <% var totalVenda  = 0 %>
+                    <% comandas.forEach((comanda)=>{ %>
+                        <tr>
+                        <% let dtSplit = comanda._id.split("-"); %>
+                        <% let totalCom= 0; %>
+                        <% var temC = false %>
+                        <% totalVenda = totalVenda + comanda.totalV %>
+                            <th scope="row"><%= dtSplit[2] + "/"+ dtSplit[1] + "/" + dtSplit[0] %></th>
+                            <th scope="row">R$<%= comanda.totalV.toFixed(2) %></th>
+                            <% for(i = 0; i < compras.length; i++){ %>
+                                <% if(compras[i]._id == comanda._id){ %>
+                                    <th scope="row">R$<%= compras[i].totalC.toFixed(2) %></th>
+                                    <% totalCom = compras[i].totalC %>
+                                    <% temC = true %>
+                                    <% totalCompra = totalCompra + comanda.totalC %>
+                                <% } %>
+                            <% } %>
+                            <% if(!temC){ %>
+                                <th scope="row">R$00.00</th>
+                            <% } %>
+                            <th scope="row">R$<%= (comanda.totalV - totalCom).toFixed(2)  %>
+                            </th>
+                        </tr>
+                        <% temC=false %>
+                    <% }) %>
+                    <tr>
+                        <th scope="row">Totais</th>
+                        <th scope="row">R$<%= totalVenda.toFixed(2) %></th>
+                        <th scope="row">R$<%= totalCompra.toFixed(2) %></th>
+                        <th scope="row">R$<%= (totalVenda - totalCompra).toFixed(2) %></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/fluxo-caixa/fluxo.js"></script>
+<%- include("./partials/footer") -%>

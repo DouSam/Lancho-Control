@@ -1,0 +1,22 @@
+<%- include("../partials/header") -%>
+
+    <div class="container mt-1">
+        <div class="row">
+            <div class="col-2 mb-1">
+                <a href="/mdPagamento/novo"><button class="btn btn-primary">Novo</button></a>
+            </div>
+        </div>
+        <ul class="list-group">
+            <% modos.forEach(function(modo){ %>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            <%= modo.nome %> - <%= modo.cod %>
+                        </div>
+                    </div>
+                </li>
+                <% }) %>
+        </ul>
+    </div>
+
+    <%- include("../partials/footer") -%>

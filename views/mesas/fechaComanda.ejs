@@ -1,0 +1,130 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <form action="/mesas/<%= mesa._id %>/fecharComanda?_method=PUT" method="post">
+        <div class="comanda">
+            <div class="row">
+                <div class="col text-center">
+                    <h3>Comanda <%= mesa.comanda.num %></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Cliente: <%= mesa.cliente ? mesa.cliente.nome : '' %></h5>
+                </div>
+                <div class="col">
+                    <h5>Horário Chegada:
+                        <%= mesa.comanda.data.toLocaleDateString() %>
+                        -
+                        <%= mesa.comanda.data.toLocaleTimeString()%>
+                    </h5>
+                </div>
+            </div>
+            <% if(mesa.cliente){ %>
+                <div class="row">
+                    <div class="col">
+                        <h5>Endereço: <%= mesa.cliente.endereco %>, Nº <%= mesa.cliente.numero %>, Bairro <%= mesa.cliente.bairro %>
+                        </h5>
+                    </div>
+                </div>
+            <% } %>
+            <div class="row my-2">
+                <div class="col text-center">
+                    <h3>Consumo</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col-1">#</th>
+                                <th scope="col">Produto</th>
+                                <th scope="col-1">Qtd</th>
+                                <th scope="col-2">Valor Unitário</th>
+                                <th scope="col-2">Valor Total Produto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyProdutos">
+                            <% var qtdPro = 0 %>
+                            <% var valT = 0 %>
+                            <% mesa.comanda.produtos.forEach(function(produtoE){ %>
+                            <% qtdPro = qtdPro + 1 %>
+                            <% valT = valT + produtoE.produto.val * produtoE.qtd %>
+                            <tr>
+                                <td><%= qtdPro %></th>
+                                <td><%= produtoE.produto.nome %></td>
+                                <td><%= produtoE.qtd %> </td>
+                                <td>R$<%= produtoE.produto.val.toFixed(2) %></td>
+                                <td>R$<%= (produtoE.produto.val * produtoE.qtd).toFixed(2) %></td>
+                            </tr>
+                            <% if(produtoE.adc !=null){ %>
+                                <% valT=valT + produtoE.adc %>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>R$<%= produtoE.adc.toFixed(2) %>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                            <% } %>
+                            <% }) %>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total: </td>
+                                <td id="total">R$<%= valT.toFixed(2) %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row my-2">
+            <div class="col text-center">
+                <h3>Pagamento</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="modoPg">Metodo de Pagamento:</label>
+                <select name="modoPg" id="modoPg" class="form-control">
+                    <% metodos.forEach(function (metodo){ %>
+                        <option value="<%= metodo.cod%>"><%= metodo.nome %></option>
+                    <% }) %>
+                    <% if(mesa.cliente){ %>
+                        <option value="conta">Conta(para posterior pagamento)</option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="col form-group">
+                <label for="valE">Valor:</label>
+                <input type="number" name="valE" step="0.1" id="valE" class="form-control" value="<%=valT.toFixed(2)%>" required>
+            </div>
+            <div class="col form-group">
+                <label for="troco">Troco:</label>
+                <input type="number" name="troco" id="troco" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" name="cpf" id="cpf" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label for="cfe">Emite Nota?</label>
+                <input type="checkbox" value="sim" name="cfe" id="cfe" class="form-control">
+            </div>
+        </div>
+        <input type="number" name="valT" id="valT" hidden value="<%= valT %>">
+        <button type="submit" class="btn btn-primary btn-block mb-1" id="btFechaComanda">Fechar comanda</button>
+    </form>
+</div>
+
+<script src="/scripts/mesa/fechaComanda.js"></script>
+
+<%- include("../partials/footer") -%>

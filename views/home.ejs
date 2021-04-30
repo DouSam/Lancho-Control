@@ -1,0 +1,31 @@
+<%- include("./partials/header") -%>
+<% if(erros != null){ %>
+    <% erros.forEach((erro)=>{ %>
+        <div class="alert alert-danger text-center" role="alert">
+            <a href="/vendas/<%= error.venda %>?error=<%= erro._id %>"><%= erro.msg %></a>
+        </div>
+    <% }) %>
+<% } %>
+<div class="container-fluid">
+    <div class="row">
+        <% comandas.forEach((comanda)=>{ %>
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= comanda.cliente.nome %> </h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">End: <%= comanda.cliente.endereco %>, <%= comanda.cliente.numero %>, <%= comanda.cliente.bairro %></li>
+                        <li class="list-group-item">Hora: <%= comanda.data.toLocaleTimeString("pt-BR") %></li>
+                        <li class="list-group-item">Troco: R$<%= (comanda.valE - comanda.valT).toFixed(2) %></li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="/vendas/<%= comanda._id %>/entregue" class="card-link">Entregue</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include("./partials/footer") -%>

@@ -1,0 +1,33 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Qtd Est</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Alerta?/Qtd Alerta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% produtos.forEach(function(produto){ %>
+                <tr>
+                    <th><%= produto.nome %></th>
+                    <td><%= produto.qtdEst %></td>
+                    <td><%= produto.val %></td>
+                    <td><%= (produto.ctrEst) ? 'Sim':'Não' %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <nav aria-label="Navegação de página exemplo" class="mt-2">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link"
+                    href="/estoque<%= parseInt(pagina)-1 < 0 ? '#' : '?pg='+(parseInt(pagina)-1) %>">Anterior</a></li>
+            <li class="page-item"><a class="page-link" href="/estoque?pg=<%= parseInt(pagina)+1 %>">Próxima</a></li>
+        </ul>
+    </nav>
+</div>
+
+<%- include("../partials/footer") -%>

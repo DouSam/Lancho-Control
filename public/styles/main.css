@@ -1,0 +1,21 @@
+*{
+    font-family: 'Oswald', sans-serif;
+    font-weight:500;
+    font-size:1.05rem
+}
+@page{size:auto; margin:5mm;}
+.textSize{
+    font-size:1.05rem
+}
+.border-top{
+    border-width:2px !important;
+    border-color: black !important;
+}
+
+strong{
+    font-size: 1.75rem;
+}
+
+.comanda{
+    background-color: darkgray;
+}

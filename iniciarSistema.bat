@@ -1,0 +1,1 @@
+net start MongoDB & cd C:\Sistema\Lancho node app.js

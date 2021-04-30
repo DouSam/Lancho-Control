@@ -1,0 +1,37 @@
+<%- include("../partials/header") -%>
+
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-12">
+            <form action="/produtos" method="GET">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Digite o nome do produto"
+                        aria-label="Digite o nome do prodduto" aria-describedby="button-addon2" name="nome">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Pesquisar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ul class="list-group">
+        <% produtos.forEach(function(produto){ %>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-10"><%= produto.nome %></div>
+                <div class="col"><a href="/produtos/<%= produto._id%>"><button type="button"
+                            class="btn btn-primary">Ver</button></a></div>
+            </div>
+        </li>
+        <% }) %>
+    </ul>
+    <nav aria-label="Navegação de página exemplo" class="mt-2">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link"
+                    href="/produtos<%= parseInt(pagina)-1 < 0 ? '#' : '?pg='+(parseInt(pagina)-1) %>">Anterior</a></li>
+            <li class="page-item"><a class="page-link" href="/produtos?pg=<%= parseInt(pagina)+1 %>">Próxima</a></li>
+        </ul>
+    </nav>
+</div>
+
+<%- include("../partials/footer") -%>

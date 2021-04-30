@@ -1,0 +1,52 @@
+<%- include("../partials/header") -%>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Codigo de barras</th>
+                <th scope="col">NCM</th>
+                <th scope="col">CEST</th>
+                <th scope="col">COFINS</th>
+                <th scope="col">CFOP</th>
+                <th scope="col">ICMS</th>
+                <th scope="col">PIS</th>
+                <th scope="col">ORIGEM</th>
+                <th scope="col">Acessar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% produtos.forEach((produto,i)=>{ %>
+                <tr>
+                    <th scope="row"><%= produto.cod %></th>
+                    <td><%= produto.nome %></td>
+                    <td><%= produto.cean %></td>
+                    <td><%= produto.ncm %></td>
+                    <td><%= produto.cest %></td>
+                    <td><%= produto.cofins %></td>
+                    <td><%= produto.cfop %></td>
+                    <td><%= produto.icms %></td>
+                    <td><%= produto.pis %></td>
+                    <td><%= produto.origem %></td>
+                    <td><a href="/produtos/<%= produto._id %>" target="_blank">Clique!</a></td>
+                </tr>
+                <% if((i % 17 == 0)&&(i != 0)){ %>
+                    <tr>
+                        <td>#</th>
+                        <td>Nome</th>
+                        <td>Codigo de barras</th>
+                        <td>NCM</th>
+                        <td>CEST</th>
+                        <td>COFINS</th>
+                        <td>CFOP</th>
+                        <td>ICMS</th>
+                        <td>PIS</th>
+                        <td>ORIGEM</th>
+                        <td>Acessar</th>
+                    </tr>
+                <% } %>
+            <% }) %>
+        </tbody>
+    </table>
+
+<%- include("../partials/footer") -%>

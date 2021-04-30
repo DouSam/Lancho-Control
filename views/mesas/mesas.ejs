@@ -1,0 +1,24 @@
+<%- include("../partials/header") -%>
+
+<div class="container-fluid mt-1">
+    <div class="row">
+        <% mesas.forEach(function(mesa){ %>
+            <div class="col-3 mb-1">
+                <div class="card text-white <%= (mesa.status == 'livre')?'bg-success' : (mesa.status == 'ocupada')?'bg-danger':'bg-warning'%>">
+                    <h5 class="card-header">Mesa: <%= mesa.numero %></h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Status: <%= mesa.status %></h5>
+                        <h5 class="card-title">Cliente: <%= mesa.cliente ? mesa.cliente.nome:''%></h5>
+                        <p class="card-text">Referência: <%= mesa.referencia %></p>
+                        <div class="text-center">
+                            <a href="/mesas/<%= mesa._id %>" class="btn btn-primary">Visualizar</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include("../partials/footer") -%>

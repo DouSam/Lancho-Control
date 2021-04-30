@@ -1,0 +1,44 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Descrição: <%= compra.obs %></h2>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col text-center">
+            <h3>Produtos</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group my-2">
+                <% compra.produtos.forEach(function(produto){ %>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">Nome: <%= produto.produto.nome %></div>
+                        <div class="col-2">Quantidade: <%= produto.qtd %></div>
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4>Data da Compra: <%= compra.dataC.toLocaleDateString("pt-BR") %><h/4>
+        </div>
+        <div class="col-6">
+            <h4>Valor da Compra: R$<%= compra.valT.toFixed(2) %></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"><a href="/compras/<%= compra._id %>/delete" class="btn btn-button btn-block btn-danger"
+                id="deletar">Excluir</a></div>
+    </div>
+</div>
+
+
+<%- include("../partials/footer") -%>

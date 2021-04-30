@@ -1,0 +1,32 @@
+<%- include("../partials/header") -%>
+
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-12">
+            <form action="/vendas/contas" method="GET">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Digite o nome do cliente"
+                        aria-label="Digite o nome do cliente" aria-describedby="button-addon2" name="nome">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Pesquisar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ul class="list-group">
+        <% comandas.forEach(function(comanda){ %>
+            <% if(comanda.cliente && (comanda.cliente.nome.toUpperCase().indexOf(nomeF.toUpperCase()) != -1)){%>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10"><%= (comanda.cliente) ? comanda.cliente.nome: ''%> - <%= comanda.dataPg.toLocaleDateString("pt-BR") %> </div>
+                        <div class="col"><a href="/vendas/<%= comanda._id%>"><button type="button"
+                                    class="btn btn-primary">Ver</button></a></div>
+                    </div>
+                </li>
+            <% }%>
+        <% }) %>
+    </ul>
+</div>
+
+<%- include("../partials/footer") -%>

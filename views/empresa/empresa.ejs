@@ -1,0 +1,69 @@
+<%- include("../partials/header") -%>
+
+    <div class="container">
+        <form action="/empresa?_method=PUT" method="post">
+            <div class="row">
+                <div class="col text-center">
+                    <h1>Informações da Empresa</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <label for="cnpj">CNPJ(sem ponto ou traços):</label>
+                    <input type="text" name="cnpj" id="cnpj" class="form-control" value="<%= empresa.cnpj %>">
+                </div>
+                <div class="col form-group">
+                    <label for="ie">Inscrição Estadual:</label>
+                    <input type="text" name="ie" id="ie" class="form-control" value="<%= empresa.ie %>">
+                </div>
+                <div class="col form-group">
+                    <label for="im">Inscrição Municipal:</label>
+                    <input type="text" name="im" id="im" class="form-control" value="<%= empresa.im %>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <label for="indRatISSQN">ISSQN:</label>
+                    <select name="indRatISSQN" id="indRatISSQN" class="form-control">
+                        <option value="S">SIM</option>
+                        <option value="N">NAO</option>
+                    </select>
+                </div>
+                <div class="col form-group">
+                    <label for="icms">ICMS:</label>
+                    <input type="text" name="icms" id="icms" class="form-control" value="<%= empresa.icms %>">
+                </div>
+                <div class="col form-group">
+                    <label for="pis">PIS:</label>
+                    <input type="text" name="pis" id="pis" class="form-control" value="<%= empresa.pis %>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <label for="cofins">COFINS:</label>
+                    <input type="text" name="cofins" id="cofins" class="form-control" value="<%= empresa.cofins %>">
+                </div>
+                <div class="col form-group">
+                    <label for="origem">Origem da Mercadoria:</label>
+                    <input type="text" name="origem" id="origem" class="form-control" value="<%= empresa.origem %>">
+                </div>
+                <div class="col form-group">
+                    <label for="csosn">CSOSN:</label>
+                    <input type="text" name="csosn" id="csosn" class="form-control" value="<%= empresa.csosn %>">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col">
+                    <label for="ultNfe">Ultima Nota Emitida:</label>
+                    <input type="Number" name="ultNfe" id="ultNfe" class="form-control" value="<%= empresa.ultNfe %>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <%- include("../partials/footer") -%>

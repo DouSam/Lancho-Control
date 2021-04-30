@@ -1,0 +1,30 @@
+{
+  "name": "lancho-control",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Douglas Samuel Goncalves",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "edge-js": "^15.5.0",
+    "ejs": "^3.1.5",
+    "escpos": "^3.0.0-alpha.6",
+    "escpos-usb": "^3.0.0-alpha.4",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.5",
+    "express-session": "^1.17.1",
+    "got": "^11.8.1",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.0",
+    "mongoose": "^5.10.5",
+    "nodemon": "^2.0.7",
+    "socket.io": "^2.3.0",
+    "winston": "^3.3.3",
+    "xml2js": "^0.4.23"
+  }
+}

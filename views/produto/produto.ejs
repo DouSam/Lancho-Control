@@ -1,0 +1,57 @@
+<%- include("../partials/header") -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Produto: <%= produto.nome %> - <%= produto.cod %></h2>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h3>Valor Unitário: <%= produto.val %></h3>
+        </div>
+        <div class="col">
+            <h3>Unidade Comercial: <%= produto.unidadeComercial %></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h3>Quantidade em Estoque: <%= produto.qtdEst %></h3>
+        </div>
+        <div class="col-6">
+            <h3>Quantidade para alerta: <%= produto.altEst %>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h3>Controla estoque? <strong> <%= produto.ctrEst ? "Sim" : "Não" %> </strong></h3>
+        </div>
+        <div class="col-6">
+            <h3>Código de Barras: <%= produto.cean %>
+            </h3>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="col">
+            <h3>NCM: <%= produto.ncm %></h3>
+        </div>
+        <div class="col">
+            <h3>CEST: <%= produto.cest %></h3>
+        </div>
+        <div class="col">
+            <h3>CFOP: <%= produto.cfop %></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6"><a href="/produtos/<%= produto._id %>/edit"
+                class="btn btn-button btn-block btn-warning">Editar</a></div>
+        <div class="col-6"><a href="/produtos/<%= produto._id %>/delete" class="btn btn-button btn-block btn-danger"
+                id="deletar">Excluir</a></div>
+    </div>
+</div>
+
+<script src="/scripts/produto/produto.js"></script>
+
+<%- include("../partials/footer") -%>
