@@ -1,8 +1,10 @@
 <p align="center">
-  <a href="https://unform.dev">
+  <a>
     <img src="https://cdn.discordapp.com/attachments/453718217773547522/835524460722389053/Lanches.png" height="350" width="450"  alt="Unform" />
   </a>
 </p>
+
+[<h3>English version here</h3>](https://github.com/DouSam/Lancho-Control/blob/main/README.us.md)
 
 <h1 align="center">Lancho Control 🍔</h1>
 
