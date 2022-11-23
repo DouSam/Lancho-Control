@@ -23,7 +23,7 @@
     "moment": "^2.29.0",
     "mongoose": "^5.10.5",
     "nodemon": "^2.0.7",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "winston": "^3.3.3",
     "xml2js": "^0.4.23"
   }
