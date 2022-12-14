@@ -15,7 +15,7 @@
     "ejs": "^3.1.5",
     "escpos": "^3.0.0-alpha.6",
     "escpos-usb": "^3.0.0-alpha.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-rate-limit": "^5.2.5",
     "express-session": "^1.17.1",
     "got": "^11.8.1",
